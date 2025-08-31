@@ -46,3 +46,29 @@ class Solution:
             return
 
         self.dfs(root.right, k)
+
+
+#iterative way
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+#time complexity - 0(n)
+#space complexity - 0(h)
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+
+        if root == None:
+            return -1
+        stack = []
+        while root != None or len(stack) > 0:
+            while root != None:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            k = k - 1
+            if k == 0:
+                return root.val
+            root = root.right
