@@ -20,3 +20,29 @@ class Solution:
         self.dfs(root.left)
         self.result.append(root.val)
         self.dfs(root.right)
+
+
+#time complexity - 0(n)
+#space complexity - 0(h)
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+
+        self.result = -1
+        self.count = 0
+        self.dfs(root, k)
+        return self.result
+
+    def dfs(self, root: Optional[TreeNode], k: int) -> None:
+
+        if root == None or self.result != -1:
+            return
+
+        self.dfs(root.left, k)
+
+        self.count += 1
+
+        if self.count == k:
+            self.result = root.val
+            return
+
+        self.dfs(root.right, k)
